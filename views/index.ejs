@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Board</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Swaggy Brad's Chat</h1>
+    <p>Welcome to swag land</p>
+    <ul class="message-list">
+      <% messages.forEach(function(message) { %>
+        <li class="message-item">
+          <p><strong>User:</strong>
+            <%= message.user %>
+          </p>
+          <p><strong>Text:</strong>
+            <%= message.text %>
+          </p>
+          <p><strong>Date:</strong>
+            <%= message.added.toLocaleString() %>
+          </p>
+        </li>
+        <% }); %>
+    </ul>
+    <a href="/new" class="add-message-button">Add New Message</a>
+  </div>
+</body>
+
 </html>
