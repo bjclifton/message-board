@@ -25,8 +25,11 @@ router.get('/new', function (req, res, next) {
 
 router.post('/new', function (req, res, next) {
   const author = req.body.author;
-  const message = req.body.message;
-  messages.push({ text: message, user: author, added: new Date() });
+  const text = req.body.message;
+  const message = { text: text, user: author, added: new Date() };
+  messages.push(message);
+  const io = req.app.get('io');
+  io.emit('chat message', message);
   res.redirect('/');
 });
 

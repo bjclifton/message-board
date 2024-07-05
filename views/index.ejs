@@ -7,6 +7,24 @@
   <title>Message Board</title>
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var socket = io();
+      var messagesList = document.querySelector('.message-list');
+
+      socket.on('chat message', function(msg) {
+        var item = document.createElement('li');
+        item.classList.add('message-item');
+        item.innerHTML = `
+          <p><strong>User:</strong> ${msg.user}</p>
+          <p><strong>Text:</strong> ${msg.text}</p>
+          <p><strong>Date:</strong> ${new Date(msg.added).toLocaleString()}</p>
+        `;
+        messagesList.appendChild(item);
+      });
+    });
+  </script>
 </head>
 
 <body>
